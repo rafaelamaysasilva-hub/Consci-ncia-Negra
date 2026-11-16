@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raízes & Consciência - Educação e Cultura Afro-Brasileira</title>
+    <style>
+        :root {
+            --primaria: #D97706; /* Ocre/Dourado */
+            --secundaria: #991B1B; /* Vermelho Terracota */
+            --fundo: #FEF3C7; /* Bege suave */
+            --escuro: #1F2937;
+            --claro: #FFFFFF;
+            --verde: #065F46;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #FFFBEB;
+            color: var(--escuro);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--escuro), var(--secundaria));
+            color: var(--claro);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--primaria);
+        }
+
+        nav {
+            background-color: var(--escuro);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 0.8rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--claro);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--primaria);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            background: var(--claro);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--primaria);
+        }
+
+        h2 {
+            color: var(--secundaria);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        /* Grid de Personalidades */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #FAFAFA;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            background-color: #D1D5DB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4B5563;
+            font-weight: bold;
+            text-align: center;
+            padding: 1rem;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-body {
+            padding: 1.2rem;
+        }
+
+        .card-body h3 {
+            color: var(--escuro);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Caixa de Curiosidades */
+        .curiosidade-box {
+            background-color: var(--fundo);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px dashed var(--primaria);
+            text-align: center;
+        }
+
+        button {
+            background-color: var(--secundaria);
+            color: var(--claro);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--primaria);
+        }
+
+        /* Estilo do Quiz */
+        .quiz-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .opcao-btn {
+            background-color: #F3F4F6;
+            color: var(--escuro);
+            text-align: left;
+            border: 2px solid #D1D5DB;
+            margin-top: 0;
+        }
+
+        .opcao-btn:hover {
+            background-color: #E5E7EB;
+        }
+
+        .correta {
+            background-color: #D1FAE5 !important;
+            border-color: var(--verde) !important;
+            color: var(--verde) !important;
+        }
+
+        .errada {
+            background-color: #FEE2E2 !important;
+            border-color: var(--secundaria) !important;
+            color: var(--secundaria) !important;
+        }
+
+        /* Ferramenta Antirracista */
+        .tradutor-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        select {
+            padding: 0.8rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            border: 1px solid #9CA3AF;
+        }
+
+        .resultado-antirracista {
+            background-color: #ECFDF5;
+            border-left: 5px solid var(--verde);
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--escuro);
+            color: var(--claro);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>✊🏿 Raízes & Consciência</h1>
+        <p>História, Cultura Afro-Brasileira, Jogos Educativos e Educação Antirracista</p>
+    </header>
+
+    <nav>
+        <a href="#historia">História & Personalidades</a>
+        <a href="#curiosidades">Curiosidades</a>
+        <a href="#quiz">Jogo de Perguntas (Quiz)</a>
+        <a href="#ferramenta">Ferramenta Antirracista</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- SEÇÃO 1: SITE EDUCATIVO (HISTÓRIA E PERSONALIDADES) -->
+        <section id="historia">
+            <h2>1. Personalidades Negras e Marcos Históricos</h2>
+            <p>Conheça figuras fundamentais que construíram a história, a ciência e a resistência no Brasil.</p>
+            
+            <div class="grid-cards">
+                <div class="card">
+                    <!-- Substitua o background-image pela URL da foto real -->
+                    <div class="card-img" style="background-color: #78350F; color: white;">
+                        [Espaço para Imagem: Zumbi e Dandara]
+                    </div>
+                    <div class="card-body">
+                        <h3>Zumbi e Dandara dos Palmares</h3>
+                        <p>Líderes do Quilombo dos Palmares, o maior símbolo de resistência contra a escravidão no Brasil colonial. O Dia da Consciência Negra (20 de novembro) homenageia a memória de Zumbi.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img" style="background-color: #991B1B; color: white;">
+                        [Espaço para Imagem: Carolina Maria de Jesus]
+                    </div>
+                    <div class="card-body">
+                        <h3>Carolina Maria de Jesus</h3>
+                        <p>Escritora mineira, autora de <em>"Quarto de Despejo"</em>. Moradora da favela do Canindé, registrou o cotidiano da pobreza e do racismo no Brasil, tornando-se uma das autoras mais traduzidas do país.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img" style="background-color: #065F46; color: white;">
+                        [Espaço para Imagem: Enedina Alves Marques]
+                    </div>
+                    <div class="card-body">
+                        <h3>Enedina Alves Marques</h3>
+                        <p>Nascida em Curitiba (PR), formou-se em 1945 pela UFPR, tornando-se a <strong>primeira mulher negra engenheira do Brasil</strong> e a primeira engenheira do estado do Paraná.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: GERADOR DE CURIOSIDADES -->
+        <section id="curiosidades">
+            <h2>2. Você Sabia? Curiosidades da Cultura Afro-Brasileira</h2>
+            <div class="curiosidade-box">
+                <p id="texto-curiosidade" style="font-size: 1.2rem; font-weight: 500;">
+                    Clique no botão abaixo para descobrir um fato histórico ou cultural!
+                </p>
+                <button onclick="novaCuriosidade()">Descobrir Nova Curiosidade</button>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: JOGO DE PERGUNTAS E RESPOSTAS (QUIZ) -->
+        <section id="quiz">
+            <h2>3. Quiz: Desafie seus Conhecimentos</h2>
+            <p>Responda às perguntas sobre história e cultura afro-brasileira:</p>
+            
+            <div id="quiz-container" style="margin-top: 1.5rem;">
+                <h3 id="pergunta-texto">Carregando pergunta...</h3>
+                <div class="quiz-opcoes" id="opcoes-container"></div>
+                <p id="feedback-quiz" style="margin-top: 1rem; font-weight: bold;"></p>
+                <button id="btn-proxima" onclick="proximaPergunta()" style="display: none;">Próxima Pergunta ➔</button>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: FERRAMENTA DIGITAL ANTIRRACISTA -->
+        <section id="ferramenta">
+            <h2>4. Ferramenta Digital: Repensando Expressões do Cotidiano</h2>
+            <p>Muitas palavras e expressões que usamos têm origem racista e reforçam preconceitos históricos. Selecione uma expressão abaixo para entender sua origem e como substituí-la:</p>
+            
+            <div class="tradutor-box" style="margin-top: 1rem;">
+                <select id="seletor-expressao" onchange="analisarExpressao()">
+                    <option value="">-- Selecione uma expressão para analisar --</option>
+                    <option value="criado-mudo">"Criado-mudo"</option>
+                    <option value="lista-negra">"Lista negra" / "Magia negra"</option>
+                    <option value="cabelo-ruim">"Cabelo ruim" / "Cabelo duro"</option>
+                    <option value="denegrir">"Denegrir"</option>
+                </select>
+
+                <div id="box-resultado" class="resultado-antirracista">
+                    <h4 id="titulo-substituicao" style="color: var(--verde); margin-bottom: 0.5rem;"></h4>
+                    <p id="explicacao-origem"></p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Projeto Educativo - Consciência Negra e Valorização da Cultura Afro-Brasileira</p>
+    </footer>
+
+    <script>
+        // --- DADOS DAS CURIOSIDADES ---
+        const curiosidades = [
+            "A Lei 10.639/2003 tornou obrigatório o ensino de História e Cultura Afro-Brasileira nas escolas de ensino fundamental e médio de todo o Brasil.",
+            "Palavras como 'cafuné', 'moleque', 'quitanda', 'fubá' e 'caçula' têm origem nas línguas africanas bantas (como o quimbundo e o iorubá).",
+            "A Capoeira foi considerada crime no Código Penal Brasileiro de 1890 até a década de 1930, quando Mestre Bimba e Mestre Pastinha lutaram por sua descriminalização e reconhecimento cultural.",
+            "Luís Gama, nascido livre, foi vendido ilegalmente como escravo aos 10 anos. Aprendeu a ler sozinho, tornou-se advogado autodidata e libertou mais de 500 pessoas escravizadas nos tribunais.",
+            "O samba nasceu nas rodas de encontro dos baianos no Rio de Janeiro, especialmente na casa da Tia Ciata, figura central da cultura afro-carioca."
+        ];
+
+        function novaCuriosidade() {
+            const indice = Math.floor(Math.random() * curiosidades.length);
+            document.getElementById("texto-curiosidade").innerText = "💡 " + curiosidades[indice];
+        }
+
+        // --- DADOS DO QUIZ ---
+        const perguntas = [
+            {
+                pergunta: "Por que o Dia da Consciência Negra é celebrado em 20 de novembro?",
+                opcoes: [
+                    "Data da assinatura da Lei Áurea",
+                    "Data da morte de Zumbi dos Palmares em 1695",
+                    "Data da criação do Quilombo dos Palmares",
+                    "Dia da chegada dos primeiros africanos ao Brasil"
+                ],
+                correta: 1,
+                explicacao: "Correto! 20 de novembro marca a morte de Zumbi dos Palmares, simbolizando a luta e a resistência do povo negro contra a opressão."
+            },
+            {
+                pergunta: "Qual lei brasileira tornou obrigatório o ensino da história e cultura afro-brasileira nas escolas?",
+                opcoes: [
+                    "Lei Eusébio de Queirós",
+                    "Lei do Ventre Livre",
+                    "Lei 10.639/2003",
+                    "Estatuto da Criança e do Adolescente"
+                ],
+                correta: 2,
+                explicacao: "Isso mesmo! A Lei 10.639/2003 alterou a Lei de Diretrizes e Bases da Educação para incluir a história afro-brasileira no currículo."
+            },
+            {
+                pergunta: "Quem foi a primeira mulher negra a publicar um romance no Brasil (o livro 'Úrsula', de 1859)?",
+                opcoes: [
+                    "Conceição Evaristo",
+                    "Maria Firmina dos Reis",
+                    "Carolina Maria de Jesus",
+                    "Djamila Ribeiro"
+                ],
+                correta: 1,
+                explicacao: "Exato! Maria Firmina dos Reis, maranhense, escreveu 'Úrsula', considerado o primeiro romance abolicionista da literatura brasileira."
+            }
+        ];
+
+        let perguntaAtual = 0;
+        let pontuacao = 0;
+
+        function carregarPergunta() {
+            const q = perguntas[perguntaAtual];
+            document.getElementById("pergunta-texto").innerText = `${perguntaAtual + 1}. ${q.pergunta}`;
+            const opcoesDiv = document.getElementById("opcoes-container");
+            opcoesDiv.innerHTML = "";
+            document.getElementById("feedback-quiz").innerText = "";
+            document.getElementById("btn-proxima").style.display = "none";
+
+            q.opcoes.forEach((opcao, index) => {
+                const btn = document.createElement("button");
+                btn.innerText = opcao;
+                btn.classList.add("opcao-btn");
+                btn.onclick = () => verificarResposta(index, btn);
+                opcoesDiv.appendChild(btn);
+            });
+        }
+
+        function verificarResposta(indiceEscolhido, botaoClicado) {
+            const q = perguntas[perguntaAtual];
+            const botoes = document.querySelectorAll(".opcao-btn");
+            botoes.forEach(b => b.disabled = true); // Trava os botões após responder
+
+            if (indiceEscolhido === q.correta) {
+                botaoClicado.classList.add("correta");
+                document.getElementById("feedback-quiz").innerText = "✅ " + q.explicacao;
+                pontuacao++;
+            } else {
+                botaoClicado.classList.add("errada");
+                botoes[q.correta].classList.add("correta");
+                document.getElementById("feedback-quiz").innerText = "❌ Não foi dessa vez. " + q.explicacao;
+            }
+
+            document.getElementById("btn-proxima").style.display = "inline-block";
+        }
+
+        function proximaPergunta() {
+            perguntaAtual++;
+            if (perguntaAtual < perguntas.length) {
+                carregarPergunta();
+            } else {
+                document.getElementById("quiz-container").innerHTML = `
+                    <h3>🎉 Fim do Quiz!</h3>
+                    <p style="font-size: 1.2rem; margin: 1rem 0;">Você acertou <strong>${pontuacao} de ${perguntas.length}</strong> perguntas!</p>
+                    <button onclick="reiniciarQuiz()">Jogar Novamente</button>
+                `;
+            }
+        }
+
+        function reiniciarQuiz() {
+            perguntaAtual = 0;
+            pontuacao = 0;
+            document.getElementById("quiz-container").innerHTML = `
+                <h3 id="pergunta-texto"></h3>
+                <div class="quiz-opcoes" id="opcoes-container"></div>
+                <p id="feedback-quiz" style="margin-top: 1rem; font-weight: bold;"></p>
+                <button id="btn-proxima" onclick="proximaPergunta()" style="display: none;">Próxima Pergunta ➔</button>
+            `;
+            carregarPergunta();
+        }
+
+        // --- FERRAMENTA ANTIRRACISTA ---
+        const expressoesDB = {
+            "criado-mudo": {
+                substituicao: "Use: Mesa de cabeceira",
+                explicacao: "O termo remete ao período escravocrata, quando pessoas escravizadas eram obrigadas a ficar imóveis ao lado da cama dos senhores segurando objetos."
+            },
+            "lista-negra": {
+                substituicao: "Use: Lista de restrições / Lista proibida",
+                explicacao: "Associar a palavra 'negra' a coisas ruins, proibidas ou ilegais reforça o preconceito linguístico de que o negro está ligado ao negativo."
+            },
+            "cabelo-ruim": {
+                substituicao: "Use: Cabelo crespo / Cabelo cacheado",
+                explicacao: "Não existe cabelo 'ruim' ou 'bom'. Classificar o cabelo afro como ruim é uma herança direta do racismo estético."
+            },
+            "denegrir": {
+                substituicao: "Use: Difamar / Manchar a reputação",
+                explicacao: "A palavra significa literalmente 'tornar negro', sendo usada como sinônimo de sujar ou estragar a imagem de alguém."
+            }
+        };
+
+        function analisarExpressao() {
+            const valor = document.getElementById("seletor-expressao").value;
+            const box = document.getElementById("box-resultado");
+
+            if (valor && expressoesDB[valor]) {
+                document.getElementById("titulo-substituicao").innerText = expressoesDB[valor].substituicao;
+                document.getElementById("explicacao-origem").innerText = expressoesDB[valor].explicacao;
+                box.style.display = "block";
+            } else {
+                box.style.display = "none";
+            }
+        }
+
+        // Inicializa o quiz ao carregar a página
+        carregarPergunta();
+    </script>
+</body>
+</html>
